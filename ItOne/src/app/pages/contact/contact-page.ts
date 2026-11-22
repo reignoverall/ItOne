@@ -10,6 +10,7 @@ import {
 import { email, form, FormField, minLength, required, submit } from '@angular/forms/signals';
 import { COMPANY } from '../../data/company';
 import { ErrorState, FieldError } from '../../shared/field-error';
+import { notBlank } from '../../shared/validators';
 
 interface ContactMessage {
   name: string;
@@ -65,7 +66,7 @@ const emptyMessage = (): ContactMessage => ({ name: '', email: '', message: '' }
         </li>
       </ul>
 
-      @if (sentName(); as name) {
+      @if (sent(); as done) {
         <section
           class="self-start rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200"
           aria-labelledby="sent-heading"
@@ -79,7 +80,7 @@ const emptyMessage = (): ContactMessage => ({ name: '', email: '', message: '' }
             Message sent
           </h2>
           <p class="mt-2 text-slate-600">
-            Thanks, {{ name }} — we’ll get back to you within one business day.
+            Thanks, {{ done.name }} — we’ll get back to you within one business day.
           </p>
           <button type="button" class="btn-primary mt-6" (click)="reset()">
             Send another message
@@ -149,12 +150,14 @@ export default class ContactPage {
   protected readonly model = signal<ContactMessage>(emptyMessage());
   protected readonly f = form(this.model, (p) => {
     required(p.name, { message: 'Please enter your name.' });
+    notBlank(p.name, 'Please enter your name.');
     required(p.email, { message: 'Please enter a valid email address.' });
     email(p.email, { message: 'Please enter a valid email address.' });
     required(p.message, { message: 'Please enter a message (at least 10 characters).' });
+    notBlank(p.message, 'Please enter a message (at least 10 characters).');
     minLength(p.message, 10, { message: 'Please enter a message (at least 10 characters).' });
   });
-  protected readonly sentName = signal<string | null>(null);
+  protected readonly sent = signal<{ name: string } | null>(null);
 
   protected bad(state: ErrorState): boolean {
     return state.touched() && state.invalid();
@@ -163,7 +166,7 @@ export default class ContactPage {
   protected async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
     const ok = await submit(this.f, async () => {
-      this.sentName.set(this.model().name.trim());
+      this.sent.set({ name: this.model().name.trim() });
       return undefined;
     });
     afterNextRender(
@@ -181,6 +184,6 @@ export default class ContactPage {
   protected reset(): void {
     this.model.set(emptyMessage());
     this.f().reset();
-    this.sentName.set(null);
+    this.sent.set(null);
   }
 }

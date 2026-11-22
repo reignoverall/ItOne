@@ -109,4 +109,16 @@ describe('RequestPage', () => {
     expect(el.querySelector('form')).toBeTruthy();
     expect((el.querySelector('#req-name') as HTMLInputElement).value).toBe('');
   });
+
+  it('rejects a name of only spaces', async () => {
+    await type('req-name', '   ');
+    expect(el.textContent).toContain('Please enter your name.');
+  });
+
+  it('accepts ZIP+4 and padded ZIPs like the ZIP checker does', async () => {
+    await type('req-zip', '80512-1234');
+    expect(el.textContent).not.toContain('Please enter a 5-digit ZIP code.');
+    await type('req-zip', ' 80512 ');
+    expect(el.textContent).not.toContain('Please enter a 5-digit ZIP code.');
+  });
 });

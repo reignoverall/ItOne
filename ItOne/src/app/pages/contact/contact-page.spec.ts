@@ -59,4 +59,13 @@ describe('ContactPage', () => {
     await fixture.whenStable();
     expect((el.querySelector('#contact-name') as HTMLInputElement).value).toBe('');
   });
+
+  it('rejects a name of only spaces', async () => {
+    await type('contact-name', '   ');
+    await type('contact-email', 'sam@example.com');
+    await type('contact-message', 'Do you service heat pumps?');
+    await submit();
+    expect(el.textContent).toContain('Please enter your name.');
+    expect(el.querySelector('form')).toBeTruthy();
+  });
 });

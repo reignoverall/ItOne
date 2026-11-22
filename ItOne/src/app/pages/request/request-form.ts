@@ -6,7 +6,9 @@ import {
   SchemaPathTree,
   validate,
 } from '@angular/forms/signals';
+import { ZIP_PATTERN } from '../../data/areas';
 import { ServiceId } from '../../data/services';
+import { notBlank } from '../../shared/validators';
 
 export type Urgency = 'emergency' | 'this-week' | 'flexible';
 export type TimeWindow = 'morning' | 'afternoon' | 'evening';
@@ -48,13 +50,19 @@ export function isoDate(date: Date): string {
 export function requestSchema(today: () => Date) {
   return (p: SchemaPathTree<ServiceRequest>) => {
     required(p.name, { message: 'Please enter your name.' });
+    notBlank(p.name, 'Please enter your name.');
     required(p.phone, { message: 'Please enter a 10-digit phone number.' });
     pattern(p.phone, /^\D*(\d\D*){10}$/, { message: 'Please enter a 10-digit phone number.' });
     required(p.email, { message: 'Please enter a valid email address.' });
     email(p.email, { message: 'Please enter a valid email address.' });
     required(p.address, { message: 'Please enter the service address.' });
+    notBlank(p.address, 'Please enter the service address.');
     required(p.zip, { message: 'Please enter a 5-digit ZIP code.' });
-    pattern(p.zip, /^\d{5}$/, { message: 'Please enter a 5-digit ZIP code.' });
+    validate(p.zip, ({ value }) =>
+      value() && !ZIP_PATTERN.test(value().trim())
+        ? { kind: 'zip', message: 'Please enter a 5-digit ZIP code.' }
+        : null,
+    );
     required(p.service, { message: 'Please choose a service.' });
     required(p.preferredDate, {
       message: 'Please pick a preferred date.',
@@ -66,6 +74,7 @@ export function requestSchema(today: () => Date) {
         : null,
     );
     required(p.details, { message: 'Please describe the problem (at least 10 characters).' });
+    notBlank(p.details, 'Please describe the problem (at least 10 characters).');
     minLength(p.details, 10, { message: 'Please describe the problem (at least 10 characters).' });
   };
 }

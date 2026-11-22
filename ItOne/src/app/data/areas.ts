@@ -20,7 +20,7 @@ export const SERVICE_AREAS: ServiceArea[] = [
   { town: 'Harbor Point', region: 'West', zips: ['80550'] },
 ];
 
-const ZIP_PATTERN = /^(\d{5})(-\d{4})?$/;
+export const ZIP_PATTERN = /^(\d{5})(-\d{4})?$/;
 
 export function findAreaByZip(input: string): ZipLookup {
   const match = ZIP_PATTERN.exec(input.trim());

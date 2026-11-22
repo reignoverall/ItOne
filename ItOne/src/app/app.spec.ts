@@ -26,4 +26,16 @@ describe('App', () => {
       'Demo site — company, reviews and details are sample content.',
     );
   });
+
+  it('skip link focuses main without navigating', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const el = fixture.nativeElement as HTMLElement;
+    document.body.appendChild(el);
+    const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+    el.querySelector('a[href="#main"]')!.dispatchEvent(event);
+    expect(event.defaultPrevented).toBe(true);
+    expect(document.activeElement).toBe(el.querySelector('main#main'));
+    el.remove();
+  });
 });

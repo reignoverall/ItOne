@@ -246,10 +246,13 @@ const WHY_US = [
         <div class="flex flex-col gap-3 sm:flex-row">
           <a
             routerLink="/request"
-            class="inline-flex items-center justify-center rounded-full bg-navy-900 px-6 py-3 font-semibold text-white transition hover:bg-navy-700"
+            class="inline-flex items-center justify-center rounded-full bg-navy-900 px-6 py-3 font-semibold text-white transition hover:bg-navy-700 focus-visible:outline-navy-950"
             >Request service</a
           >
-          <a [href]="company.phoneHref" class="btn-secondary text-navy-950 hover:bg-navy-900/10">
+          <a
+            [href]="company.phoneHref"
+            class="btn-secondary text-navy-950 hover:bg-navy-900/10 focus-visible:outline-navy-950"
+          >
             {{ company.phoneDisplay }}
           </a>
         </div>
