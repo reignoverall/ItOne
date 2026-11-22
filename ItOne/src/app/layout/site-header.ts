@@ -50,7 +50,8 @@ export const NAV_LINKS: { path: string; label: string }[] = [
             />
           </svg>
           <span
-            >Call now<span class="sr-only">: {{ company.phoneDisplay }}</span></span
+            >Call<span class="max-sm:hidden"> now</span
+            ><span class="sr-only">: {{ company.phoneDisplay }}</span></span
           >
         </a>
         <button

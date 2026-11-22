@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Project
+
+A demo website for a **fictional** HVAC company ("Summit Air Heating & Cooling"), used as a portfolio piece for HVAC prospects. Brand details (name, phone, hours) live in `src/app/data/company.ts`; services, service areas and sample reviews are static data in `src/app/data/`. Forms validate locally and show a confirmation. Nothing is sent to a backend. Design and plan: `docs/superpowers/specs/` and `docs/superpowers/plans/`.
+
 ## Repository layout
 
 The git root is the parent directory (`Desktop/ItOne`); the Angular app lives in this nested `ItOne/` folder. Run all npm/ng commands from here.

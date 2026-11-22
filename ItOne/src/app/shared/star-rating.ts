@@ -12,7 +12,7 @@ import { Component, computed, input } from '@angular/core';
       <svg
         aria-hidden="true"
         viewBox="0 0 20 20"
-        class="size-full"
+        class="aspect-square h-full w-auto"
         [class.fill-ember-500]="filled"
         [class.fill-slate-300]="!filled"
       >
