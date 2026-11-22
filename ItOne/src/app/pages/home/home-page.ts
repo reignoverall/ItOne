@@ -42,19 +42,8 @@ const WHY_US = [
         aria-hidden="true"
         class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,var(--color-ember-500)_0%,transparent_45%),radial-gradient(ellipse_at_bottom_left,var(--color-sky-400)_0%,transparent_50%)] opacity-35"
       ></div>
-      <div class="container-page grid items-center gap-12 py-20 lg:grid-cols-[1.15fr_1fr] lg:py-28">
+      <div class="container-page items-center gap-12 py-20 lg:grid-cols-[1.15fr_1fr] lg:py-28">
         <div>
-          <p
-            class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-sky-100 ring-1 ring-white/20"
-          >
-            <span class="relative flex size-2.5" aria-hidden="true">
-              <span
-                class="absolute inline-flex size-full rounded-full bg-emerald-400 opacity-75 motion-safe:animate-ping"
-              ></span>
-              <span class="relative inline-flex size-2.5 rounded-full bg-emerald-400"></span>
-            </span>
-            Technicians available today
-          </p>
           <h1
             id="hero-heading"
             class="mt-6 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl"
@@ -83,33 +72,6 @@ const WHY_US = [
           </ul>
         </div>
 
-        <!-- Decorative thermostat card -->
-        <div aria-hidden="true" class="relative mx-auto w-full max-w-sm">
-          <div
-            class="rounded-[2rem] bg-white/10 p-6 shadow-2xl ring-1 ring-white/20 backdrop-blur motion-safe:animate-[float_6s_ease-in-out_infinite]"
-          >
-            <div class="flex items-center justify-between text-sm text-slate-200">
-              <span>Living room</span><span>Cooling</span>
-            </div>
-            <div class="my-8 flex justify-center">
-              <div
-                class="flex size-44 flex-col items-center justify-center rounded-full bg-gradient-to-br from-sky-400 to-navy-700 shadow-inner ring-8 ring-white/10"
-              >
-                <span class="text-6xl font-extralight">72°</span>
-                <span class="text-xs tracking-widest text-sky-100 uppercase">Set to 72</span>
-              </div>
-            </div>
-            <div class="rounded-2xl bg-white p-4 text-navy-900 shadow-lg">
-              <p class="text-xs font-semibold tracking-wider text-slate-600 uppercase">
-                Service update
-              </p>
-              <p class="mt-1 font-semibold">Technician en route · 18 min</p>
-              <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-200">
-                <div class="h-full w-2/3 rounded-full bg-ember-500"></div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
