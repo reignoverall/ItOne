@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Project
+
+A demo website for a **fictional** HVAC company ("Summit Air Heating & Cooling"), used as a portfolio piece for HVAC prospects. Brand details (name, phone, hours) live in `src/app/data/company.ts`; services, service areas and sample reviews are static data in `src/app/data/`. Forms validate locally and show a confirmation. Nothing is sent to a backend. Design and plan: `docs/superpowers/specs/` and `docs/superpowers/plans/`.
+
 ## Repository layout
 
 The git root is the parent directory (`Desktop/ItOne`); the Angular app lives in this nested `ItOne/` folder. Run all npm/ng commands from here.
@@ -22,6 +26,8 @@ No linter is configured.
 - Angular 22 standalone app: `src/main.ts` calls `bootstrapApplication(App, appConfig)`. App-wide providers go in `src/app/app.config.ts`; routes in `src/app/app.routes.ts` (currently empty — add feature routes as lazy `loadComponent`/`loadChildren`).
 - Styling: Tailwind CSS v4 via `@tailwindcss/postcss` (`.postcssrc.json`), pulled in with `@import 'tailwindcss'` in `src/styles.css`. There is no `tailwind.config.js`; configure Tailwind in CSS.
 - Production budgets (`angular.json`): initial bundle warns at 500kB / errors at 1MB; each component stylesheet warns at 4kB / errors at 8kB — prefer Tailwind utilities over large component CSS.
+- Every route is lazy-loaded, so on first paint `<main>` is empty. It keeps `min-h-dvh` (`src/app/app.html`) so the footer starts below the fold and doesn't jump when the page chunk arrives. Removing it brought back a 0.92 CLS on Lighthouse.
+- Measure performance on a production build (`npx ng build`, then serve `dist/ItOne/browser`), not `ng serve`: the dev server is unminified and scores ~30.
 - `.mcp.json` registers the Angular CLI MCP server (`npx @angular/cli mcp`) for Angular docs and best-practice lookups.
 
 ## Coding conventions
